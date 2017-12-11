@@ -19,7 +19,7 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="length">Length</label>
-            <input type="text" id="length" formControlName="length" class="form-control">
+            <input type="number" id="length" formControlName="length" class="form-control">
           </div>
         </div>
       </div>
@@ -39,19 +39,11 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <img [src]="imageURL" class="img-responsive">
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-xs-12" formArrayName="authors">
-          <!-- Oorspronkelijk: <div class="row" *ngFor="let authorCtrl of bookForm.get('authors').controls; let i = index" [formGroupName]="i" -->
           <div class="row" *ngFor="let authorCtrl of bookForm['controls'].authors['controls']; let i = index" [formGroupName]="i"
                style="margin-top: 10px;">
-            <!-- De volgende regel voeg je ook toe -->
-            <pre *ngIf="authorCtrl">{{ authorCtrl.value | json }}</pre>
             <div class="col-xs-8">
               <label for="firstName">First Name</label>
               <input type="text" id="firstName" class="form-control" formControlName="firstName">
@@ -64,44 +56,19 @@
               <label for="birthYear">Year of Birth</label>
               <input type="number" id="birthYear" class="form-control" formControlName="birthYear">
             </div>
-            <div class="col-xs-2">
-              <button type="button" class="btn btn-danger" (click)="onDeleteAuthor(i)">X</button>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12">
-              <button type="button" class="btn btn-success" (click)="onAddAuthor()">Add Author</button>
-            </div>
-          </div>
-          <br/>
-          <br/>
         </div>
+      </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12" formArrayName="publishers">
-          <!-- Oorspronkelijk: <div class="row" *ngFor="let authorCtrl of bookForm.get('authors').controls; let i = index" [formGroupName]="i" -->
           <div class="row" *ngFor="let publisherCtrl of bookForm['controls'].publishers['controls']; let i = index" [formGroupName]="i"
                style="margin-top: 10px;">
-            <!-- De volgende regel voeg je ook toe -->
-            <pre *ngIf="publisherCtrl">{{ publisherCtrl.value | json }}</pre>
             <div class="col-xs-8">
               <label for="name">Publisher Name</label>
               <input type="text" id="name" class="form-control" formControlName="name">
             </div>
-            <div class="col-xs-2">
-              <button type="button" class="btn btn-danger" (click)="onDeletePublisher(i)">X</button>
-            </div>
           </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-12">
-              <button type="button" class="btn btn-success" (click)="onAddPublisher()">Add Publisher</button>
-            </div>
-          </div>
-          <br/>
-          <br/>
         </div>
       </div>
 

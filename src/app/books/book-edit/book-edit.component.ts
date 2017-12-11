@@ -28,6 +28,8 @@ export class BookEditComponent implements OnInit {
           this.initForm();
         }
       );
+    this.onAddPublisher();
+    this.onAddAuthor();
   }
 
   onSubmit() {
@@ -56,7 +58,7 @@ export class BookEditComponent implements OnInit {
   onAddPublisher() {
     (<FormArray>this.bookForm.get('publishers')).push(
       new FormGroup({
-        'name': new FormControl(null, Validators.required)
+        'name': new FormControl(null)
       })
     );
   }
@@ -78,8 +80,8 @@ export class BookEditComponent implements OnInit {
     let bookLength = 0;
     let bookLanguage = '';
     let bookImagePath = '';
-    let bookAuthors = new FormArray([]);
-    let bookPublishers = new FormArray([]);
+    const bookAuthors = new FormArray([]);
+    const bookPublishers = new FormArray([]);
 
     if (this.editMode) {
       const book = this.booksService.getBook(this.id);
@@ -88,7 +90,7 @@ export class BookEditComponent implements OnInit {
       bookLength = book.length;
       bookLanguage = book.language;
       if (book['authors']) {
-        for (let author of book.authors) {
+        for (const author of book.authors) {
           bookAuthors.push(
             new FormGroup({
               'firstName': new FormControl(author.firstName, Validators.required),
@@ -102,10 +104,10 @@ export class BookEditComponent implements OnInit {
         }
       }
       if (book['publishers']) {
-        for (let publisher of book.publishers) {
+        for (const publisher of book.publishers) {
           bookPublishers.push(
             new FormGroup({
-              'name': new FormControl(publisher.name, Validators.required)
+              'name': new FormControl(publisher.name)
             })
           );
         }
