@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import {BooksService} from '../books.service';
 
@@ -13,6 +13,8 @@ export class BookEditComponent implements OnInit {
   id: number;
   editMode = false;
   bookForm: FormGroup;
+  bookAuthor: FormGroup;
+  bookPublisher: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private booksService: BooksService,
@@ -52,7 +54,8 @@ export class BookEditComponent implements OnInit {
     let bookImagePath = '';
     let bookAuthorFirstName = '';
     let bookAuthorLastName = '';
-    let bookAuthorBirthYear = 2017;
+    let bookAuthorBirthYear = '';
+    let bookPublisherName = '';
 
     if (this.editMode) {
       const book = this.booksService.getBook(this.id);
@@ -62,7 +65,8 @@ export class BookEditComponent implements OnInit {
       bookLanguage = book.language;
       bookAuthorFirstName = book.author.firstName;
       bookAuthorLastName = book.author.lastName;
-      bookAuthorBirthYear = book.author.birthYear;
+      bookAuthorBirthYear = book.author.dateOfBirth;
+      bookPublisherName = book.publisher.name;
     }
 
     this.bookForm = new FormGroup({
@@ -70,9 +74,14 @@ export class BookEditComponent implements OnInit {
       'length': new FormControl(bookLength, Validators.required),
       'language': new FormControl(bookLanguage, Validators.required),
       'imageURL': new FormControl(bookImagePath, Validators.required),
-      'firstName': new FormControl(bookAuthorFirstName, Validators.required),
-      'lastName': new FormControl(bookAuthorLastName, Validators.required),
-      'birthYear': new FormControl(bookAuthorBirthYear, Validators.required)
+      'author': this.bookAuthor = new FormGroup({
+          'firstName': new FormControl(bookAuthorFirstName, Validators.required),
+          'lastName': new FormControl(bookAuthorLastName, Validators.required),
+          'birthYear': new FormControl(bookAuthorBirthYear, Validators.required)
+        }),
+      'publisher': this.bookPublisher = new FormGroup({
+        'name': new FormControl(bookPublisherName, Validators.required)
+      })
     });
   }
 

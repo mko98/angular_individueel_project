@@ -2,11 +2,13 @@
 export class Author {
   public firstName: string;
   public lastName: string;
-  public birthYear: number;
+  public dateOfBirth: string;
+  public imageURL: string;
 
-  constructor(firstName: string, lastName: string, birthYear: number) {
+  constructor(firstName: string, lastName: string, dateOfBirth: string, imageURL: string) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.birthYear = birthYear;
+    this.dateOfBirth = dateOfBirth;
+    this.imageURL = imageURL;
   }
 }

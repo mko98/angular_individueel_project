@@ -46,8 +46,14 @@ export class BooksService {
       {
         title: book.title,
         imageURL: book.imageURL,
-        author: book.author,
-        publisher: book.publisher,
+        author: {
+          firstName: book.author.firstName,
+          lastName: book.author.lastName,
+          birthYear: book.author.dateOfBirth
+        },
+        publisher: {
+          name: book.publisher.name
+        },
         language: book.language,
         length: book.length,
         headers: this.headers
@@ -75,10 +81,10 @@ export class BooksService {
       author: {
         firstName: newBook.author.firstName,
         lastName: newBook.author.lastName,
-        birthYear: newBook.author.birthYear
+        birthYear: newBook.author.dateOfBirth,
       },
       publisher: {
-        name: newBook.publisher.name
+        name: newBook.publisher.name,
       },
       language: newBook.language,
       length: newBook.length,

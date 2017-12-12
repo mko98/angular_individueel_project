@@ -1,0 +1,15 @@
+<div class="row">
+  <!--<div class="col-xs-12">-->
+    <!--<button class="btn btn-success" (click)="onNewBook()">New Book</button>-->
+  <!--</div>-->
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-publisher-item
+      *ngFor="let bookEl of books; let i = index"
+      [book]="bookEl"
+      [index]="i"></app-publisher-item>
+  </div>
+</div>
+
