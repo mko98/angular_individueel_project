@@ -34,43 +34,59 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="imageURL">Image URL</label>
-            <input type="text" id="imageURL" formControlName="imageURL" class="form-control" #imageURL>
+            <label for="firstName">FirstName</label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control" #imageURL>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="lastName">LastName</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control" #imageURL>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="birthYear">BirthYear</label>
+            <input type="number" id="birthYear" formControlName="birthYear" class="form-control" #imageURL>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12" formArrayName="authors">
-          <div class="row" *ngFor="let authorCtrl of bookForm['controls'].authors['controls']; let i = index" [formGroupName]="i"
-               style="margin-top: 10px;">
-            <div class="col-xs-8">
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" class="form-control" formControlName="firstName">
-            </div>
-            <div class="col-xs-8">
-              <label for="lastName">Surname</label>
-              <input type="text" id="lastName" class="form-control" formControlName="lastName">
-            </div>
-            <div class="col-xs-2">
-              <label for="birthYear">Year of Birth</label>
-              <input type="number" id="birthYear" class="form-control" formControlName="birthYear">
-            </div>
-        </div>
-      </div>
-      </div>
+      <!--<div class="row">-->
+        <!--<div class="col-xs-12" formArrayName="authors">-->
+          <!--<div class="row" *ngFor="let authorCtrl of bookForm['controls'].authors['controls']; let i = index" [formGroupName]="i"-->
+               <!--style="margin-top: 10px;">-->
+            <!--<div class="col-xs-8">-->
+              <!--<label for="firstName">First Name</label>-->
+              <!--<input type="text" id="firstName" class="form-control" formControlName="firstName">-->
+            <!--</div>-->
+            <!--<div class="col-xs-8">-->
+              <!--<label for="lastName">Surname</label>-->
+              <!--<input type="text" id="lastName" class="form-control" formControlName="lastName">-->
+            <!--</div>-->
+            <!--<div class="col-xs-2">-->
+              <!--<label for="birthYear">Year of Birth</label>-->
+              <!--<input type="number" id="birthYear" class="form-control" formControlName="birthYear">-->
+            <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
 
-      <div class="row">
-        <div class="col-xs-12" formArrayName="publishers">
-          <div class="row" *ngFor="let publisherCtrl of bookForm['controls'].publishers['controls']; let i = index" [formGroupName]="i"
-               style="margin-top: 10px;">
-            <div class="col-xs-8">
-              <label for="name">Publisher Name</label>
-              <input type="text" id="name" class="form-control" formControlName="name">
-            </div>
-          </div>
-        </div>
-      </div>
+      <!--<div class="row">-->
+        <!--<div class="col-xs-12" formArrayName="publishers">-->
+          <!--<div class="row" *ngFor="let publisherCtrl of bookForm['controls'].publishers['controls']; let i = index" [formGroupName]="i"-->
+               <!--style="margin-top: 10px;">-->
+            <!--<div class="col-xs-8">-->
+              <!--<label for="name">Publisher Name</label>-->
+              <!--<input type="text" id="name" class="form-control" formControlName="name">-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
     </form>
   </div>

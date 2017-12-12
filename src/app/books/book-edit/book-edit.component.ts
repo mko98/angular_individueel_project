@@ -28,8 +28,6 @@ export class BookEditComponent implements OnInit {
           this.initForm();
         }
       );
-    this.onAddPublisher();
-    this.onAddAuthor();
   }
 
   onSubmit() {
@@ -42,34 +40,6 @@ export class BookEditComponent implements OnInit {
     this.onCancel();
   }
 
-  onAddAuthor() {
-    (<FormArray>this.bookForm.get('authors')).push(
-      new FormGroup({
-        'firstName': new FormControl(null, Validators.required),
-        'lastName': new FormControl(null, Validators.required),
-        'birthYear': new FormControl(null, [
-          Validators.required,
-          Validators.pattern(/^[1-9]+[0-9]*$/)
-        ])
-      })
-    );
-  }
-
-  onAddPublisher() {
-    (<FormArray>this.bookForm.get('publishers')).push(
-      new FormGroup({
-        'name': new FormControl(null)
-      })
-    );
-  }
-
-  onDeleteAuthor(index: number) {
-    (<FormArray>this.bookForm.get('authors')).removeAt(index);
-  }
-
-  onDeletePublisher(index: number) {
-    (<FormArray>this.bookForm.get('publishers')).removeAt(index);
-  }
 
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
@@ -80,8 +50,9 @@ export class BookEditComponent implements OnInit {
     let bookLength = 0;
     let bookLanguage = '';
     let bookImagePath = '';
-    const bookAuthors = new FormArray([]);
-    const bookPublishers = new FormArray([]);
+    let bookAuthorFirstName = '';
+    let bookAuthorLastName = '';
+    let bookAuthorBirthYear = 2017;
 
     if (this.editMode) {
       const book = this.booksService.getBook(this.id);
@@ -89,30 +60,9 @@ export class BookEditComponent implements OnInit {
       bookImagePath = book.imageURL;
       bookLength = book.length;
       bookLanguage = book.language;
-      if (book['authors']) {
-        for (const author of book.authors) {
-          bookAuthors.push(
-            new FormGroup({
-              'firstName': new FormControl(author.firstName, Validators.required),
-              'lastName': new FormControl(author.firstName, Validators.required),
-              'birthYear': new FormControl(author.birthYear, [
-                Validators.required,
-                Validators.pattern(/^[1-9]+[0-9]*$/)
-              ])
-            })
-          );
-        }
-      }
-      if (book['publishers']) {
-        for (const publisher of book.publishers) {
-          bookPublishers.push(
-            new FormGroup({
-              'name': new FormControl(publisher.name)
-            })
-          );
-        }
-
-      }
+      bookAuthorFirstName = book.author.firstName;
+      bookAuthorLastName = book.author.lastName;
+      bookAuthorBirthYear = book.author.birthYear;
     }
 
     this.bookForm = new FormGroup({
@@ -120,8 +70,9 @@ export class BookEditComponent implements OnInit {
       'length': new FormControl(bookLength, Validators.required),
       'language': new FormControl(bookLanguage, Validators.required),
       'imageURL': new FormControl(bookImagePath, Validators.required),
-      'authors': bookAuthors,
-      'publishers': bookPublishers
+      'firstName': new FormControl(bookAuthorFirstName, Validators.required),
+      'lastName': new FormControl(bookAuthorLastName, Validators.required),
+      'birthYear': new FormControl(bookAuthorBirthYear, Validators.required)
     });
   }
 

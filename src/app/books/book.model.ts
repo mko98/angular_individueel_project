@@ -7,15 +7,15 @@ export class Book {
   public length: number;
   public language: string;
   public imageURL: string;
-  public authors: Author[];
-  public publishers: Publisher[];
+  public author: Author;
+  public publisher: Publisher;
 
-  constructor(title: string, length: number, language: string, imagePath: string, authors: Author[], publishers: Publisher[]) {
+  constructor(title: string, length: number, language: string, imagePath: string, authors: Author, publishers: Publisher) {
     this.title = title;
     this.length = length;
     this.language = language;
     this.imageURL = imagePath;
-    this.authors = authors;
-    this.publishers = publishers;
+    this.author = authors;
+    this.publisher = publishers;
   }
 }

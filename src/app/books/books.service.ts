@@ -46,8 +46,8 @@ export class BooksService {
       {
         title: book.title,
         imageURL: book.imageURL,
-        author: book.authors,
-        publisher: book.publishers,
+        author: book.author,
+        publisher: book.publisher,
         language: book.language,
         length: book.length,
         headers: this.headers
@@ -72,8 +72,14 @@ export class BooksService {
     return this.http.put(this.serverUrl + '/' + newBook._id, {
       title: newBook.title,
       imageURL: newBook.imageURL,
-      author: newBook.authors,
-      publisher: newBook.publishers,
+      author: {
+        firstName: newBook.author.firstName,
+        lastName: newBook.author.lastName,
+        birthYear: newBook.author.birthYear
+      },
+      publisher: {
+        name: newBook.publisher.name
+      },
       language: newBook.language,
       length: newBook.length,
       headers: this.headers

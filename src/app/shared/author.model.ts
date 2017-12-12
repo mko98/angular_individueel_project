@@ -1,6 +1,5 @@
 
 export class Author {
-  public _id: string;
   public firstName: string;
   public lastName: string;
   public birthYear: number;
