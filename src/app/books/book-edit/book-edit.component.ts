@@ -52,6 +52,7 @@ export class BookEditComponent implements OnInit {
     let bookLength = 0;
     let bookLanguage = '';
     let bookImagePath = '';
+    let bookIsbn = '';
     let bookAuthorFirstName = '';
     let bookAuthorLastName = '';
     let bookAuthorDateOfBirth = '';
@@ -67,6 +68,7 @@ export class BookEditComponent implements OnInit {
       bookImagePath = book.imageURL;
       bookLength = book.length;
       bookLanguage = book.language;
+      bookIsbn = book.isbn;
       bookAuthorFirstName = book.author.firstName;
       bookAuthorLastName = book.author.lastName;
       bookAuthorDateOfBirth = book.author.dateOfBirth;
@@ -81,6 +83,7 @@ export class BookEditComponent implements OnInit {
       'title': new FormControl(bookTitle, Validators.required),
       'length': new FormControl(bookLength, Validators.required),
       'language': new FormControl(bookLanguage, Validators.required),
+      'isbn': new FormControl(bookIsbn, Validators.required),
       'imageURL': new FormControl(bookImagePath, Validators.required),
       'author': this.bookAuthor = new FormGroup({
           'firstName': new FormControl(bookAuthorFirstName, Validators.required),
