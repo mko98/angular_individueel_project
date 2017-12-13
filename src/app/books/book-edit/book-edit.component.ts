@@ -54,8 +54,12 @@ export class BookEditComponent implements OnInit {
     let bookImagePath = '';
     let bookAuthorFirstName = '';
     let bookAuthorLastName = '';
-    let bookAuthorBirthYear = '';
+    let bookAuthorDateOfBirth = '';
+    let bookAuthorImageURL = '';
     let bookPublisherName = '';
+    let bookPublisherabbreviation = '';
+    let bookPublisherlocation = '';
+    let bookPublisherkvkNumber = '';
 
     if (this.editMode) {
       const book = this.booksService.getBook(this.id);
@@ -65,8 +69,12 @@ export class BookEditComponent implements OnInit {
       bookLanguage = book.language;
       bookAuthorFirstName = book.author.firstName;
       bookAuthorLastName = book.author.lastName;
-      bookAuthorBirthYear = book.author.dateOfBirth;
+      bookAuthorDateOfBirth = book.author.dateOfBirth;
+      bookAuthorImageURL = book.author.authorImageURL;
       bookPublisherName = book.publisher.name;
+      bookPublisherabbreviation = book.publisher.abbreviation;
+      bookPublisherlocation = book.publisher.location;
+      bookPublisherkvkNumber = book.publisher.kvkNumber;
     }
 
     this.bookForm = new FormGroup({
@@ -77,10 +85,14 @@ export class BookEditComponent implements OnInit {
       'author': this.bookAuthor = new FormGroup({
           'firstName': new FormControl(bookAuthorFirstName, Validators.required),
           'lastName': new FormControl(bookAuthorLastName, Validators.required),
-          'birthYear': new FormControl(bookAuthorBirthYear, Validators.required)
+          'dateOfBirth': new FormControl(bookAuthorDateOfBirth, Validators.required),
+          'authorImageURL': new FormControl(bookAuthorImageURL, Validators.required)
         }),
       'publisher': this.bookPublisher = new FormGroup({
-        'name': new FormControl(bookPublisherName, Validators.required)
+        'name': new FormControl(bookPublisherName, Validators.required),
+        'abbreviation': new FormControl(bookPublisherabbreviation, Validators.required),
+        'location': new FormControl(bookPublisherlocation, Validators.required),
+        'kvkNumber': new FormControl(bookPublisherkvkNumber, Validators.required)
       })
     });
   }

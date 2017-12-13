@@ -64,11 +64,19 @@
       <div class="row" formGroupName="author">
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="birthYear">BirthYear</label>
-            <input type="number" id="birthYear" formControlName="birthYear" class="form-control">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="text" id="dateOfBirth" formControlName="dateOfBirth" class="form-control">
           </div>
         </div>
       </div>
+        <div class="row" formGroupName="author">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="authorImageURL">Image URL</label>
+              <input type="text" id="authorImageURL" formControlName="authorImageURL" class="form-control">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-xs-12">
         <h3>Publisher</h3>
@@ -80,6 +88,30 @@
           </div>
         </div>
       </div>
+        <div class="row" formGroupName="publisher">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="abbreviation">Abbreviation</label>
+              <input type="text" id="abbreviation" formControlName="abbreviation" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row" formGroupName="publisher">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" formControlName="location" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row" formGroupName="publisher">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="kvkNumber">KVK Number</label>
+              <input type="text" id="kvkNumber" formControlName="kvkNumber" class="form-control">
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverUrl: 'https://node-individueel-project.herokuapp.com/api/v1'
+  serverUrl: 'http://localhost:3000/api/v1'
 };

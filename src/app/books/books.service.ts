@@ -45,17 +45,22 @@ export class BooksService {
     return this.http.post(this.serverUrl,
       {
         title: book.title,
+        length: book.length,
+        language: book.language,
+        isbn: book.isbn,
         imageURL: book.imageURL,
         author: {
           firstName: book.author.firstName,
           lastName: book.author.lastName,
-          birthYear: book.author.dateOfBirth
+          dateOfBirth: book.author.dateOfBirth,
+          authorImageURL: book.author.authorImageURL
         },
         publisher: {
-          name: book.publisher.name
+          name: book.publisher.name,
+          abbreviation: book.publisher.abbreviation,
+          location: book.publisher.location,
+          kvkNumber: book.publisher.kvkNumber
         },
-        language: book.language,
-        length: book.length,
         headers: this.headers
       })
       .toPromise()
@@ -77,17 +82,22 @@ export class BooksService {
     console.log('Book updaten: ' + newBook.title);
     return this.http.put(this.serverUrl + '/' + newBook._id, {
       title: newBook.title,
+      length: newBook.length,
+      language: newBook.language,
+      isbn: newBook.isbn,
       imageURL: newBook.imageURL,
       author: {
         firstName: newBook.author.firstName,
         lastName: newBook.author.lastName,
-        birthYear: newBook.author.dateOfBirth,
+        dateOfBirth: newBook.author.dateOfBirth,
+        authorImageURL: newBook.author.authorImageURL
       },
       publisher: {
         name: newBook.publisher.name,
+        abbreviation: newBook.publisher.abbreviation,
+        location: newBook.publisher.location,
+        kvkNumber: newBook.publisher.kvkNumber
       },
-      language: newBook.language,
-      length: newBook.length,
       headers: this.headers
     })
       .toPromise()
