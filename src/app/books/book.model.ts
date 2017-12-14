@@ -2,7 +2,6 @@ import { Author } from '../shared/author.model';
 import {Publisher} from '../shared/publisher.model';
 
 export class Book {
-  public _id: string;
   public title: string;
   public length: number;
   public language: string;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {Book} from '../../books/book.model';
-import {BooksService} from '../../books/books.service';
+import {BooksService} from "../../books/books.service";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -10,7 +11,8 @@ import {BooksService} from '../../books/books.service';
   styleUrls: ['./author-detail.component.css']
 })
 export class AuthorDetailComponent implements OnInit {
-  book: Book;
+  private subscription: Subscription;
+  book: Book[];
   id: number;
 
   constructor(private booksService: BooksService,
@@ -20,23 +22,22 @@ export class AuthorDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.book = this.booksService.getBook(this.id);
-        }
-      );
+        .subscribe(
+          (params: Params) => {
+            this.id = +params['id'];
+            this.booksService.getAuthorBooks(this.id)
+              .then(books => this.book = books)
+              .catch(error => console.log(error));
+            this.subscription = this.booksService.booksChanged
+              .subscribe(
+                (books: Book[]) => {
+                  this.book = books;
+                }
+              );
+          });
+    //     );
+
   }
 
 
-
-  onEditBook() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
-    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
-  }
-
-  onDeleteBook() {
-    this.booksService.deleteBook(this.id);
-    this.router.navigate(['../']);
-  }
 }

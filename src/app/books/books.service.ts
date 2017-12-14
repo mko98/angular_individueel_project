@@ -10,8 +10,9 @@ import {Headers} from '@angular/http';
 export class BooksService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private serverUrl = environment.serverUrl + '/books'; // URL to web api
+  private serverUrl = environment.serverUrl + '/'; // URL to web api
   private books: Book[] = [];
+  private authorBooks: Book[] = [];
 
   booksChanged = new Subject<Book[]>();
 
@@ -19,7 +20,7 @@ export class BooksService {
 
   public getBooks(): Promise<Book[]> {
     console.log('books ophalen van server');
-    return this.http.get(this.serverUrl, {headers: this.headers})
+    return this.http.get(this.serverUrl + '/books', {headers: this.headers})
       .toPromise()
       .then(response => {
         console.dir(response.json());
@@ -42,7 +43,7 @@ export class BooksService {
     this.booksChanged.next(this.books.slice());
 
     console.log('Book toevoegen: ' + book.title);
-    return this.http.post(this.serverUrl,
+    return this.http.post(this.serverUrl  + '/books',
       {
         title: book.title,
         length: book.length,
@@ -74,13 +75,13 @@ export class BooksService {
   }
 
   updateBook(index: number, newBook: Book): Promise<Book> {
-    newBook._id = this.books[index]._id;
+    const title = this.books[index].title;
 
     this.books[index] = newBook;
     this.booksChanged.next(this.books.slice());
 
-    console.log('Book updaten: ' + newBook.title);
-    return this.http.put(this.serverUrl + '/' + newBook._id, {
+    console.log('Book updaten: ' + title);
+    return this.http.put(this.serverUrl + '/books' + '/' + title, {
       title: newBook.title,
       length: newBook.length,
       language: newBook.language,
@@ -116,10 +117,27 @@ export class BooksService {
     this.booksChanged.next(this.books.slice());
 
     console.log('Book verwijderen: ' + bookToDelete.title);
-    return this.http.delete(this.serverUrl + '/' + bookToDelete._id)
+    return this.http.delete(this.serverUrl + '/books' + '/' + bookToDelete.title)
       .toPromise()
       .then(response => {
         return response.json() as Book;
+      })
+      .catch(error => {
+        return this.handleError(error);
+      });
+  }
+
+  public getAuthorBooks(index: number): Promise<Book[]> {
+    console.log('' +
+      'books ophalen van server');
+    const firstName = this.books[index].author.firstName;
+    console.log(firstName);
+    return this.http.get(this.serverUrl + '/authors' + '/' + firstName, {headers: this.headers})
+      .toPromise()
+      .then(response => {
+        console.dir(response.json());
+        this.authorBooks = response.json() as Book[];
+        return response.json() as Book[];
       })
       .catch(error => {
         return this.handleError(error);
